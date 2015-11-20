@@ -6,13 +6,13 @@ html_document
 keep_md
 true
 
-# Project Description
+## Project Description
 
 Using the data from: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones the task was to clean and 
 arrange information from the accelerometer measurements of Galaxy S II devices worn by 30 participants while doing a variety of
 physical activities.
 
-# Study design and data processing
+## Study design and data processing
 
 From the UCI Machine Learning Repository linked above:
 
@@ -28,7 +28,7 @@ components, was separated using a Butterworth low-pass filter into body accelera
 have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features 
 was obtained by calculating variables from the time and frequency domain."
 
-# Creating the tidy datafile
+## Creating the tidy datafile
 
 The tidy datafile was created through the following steps:
 
@@ -42,25 +42,25 @@ The tidy datafile was created through the following steps:
 8. Alter the names for the various measurements to be less abbreviated and easier to understand.
 9. Aggregate and write the table to "tidydata.txt".
 
-# Cleaning of the data
+## Cleaning of the data
 
 The cleaning script takes the X_test/X_train, Y_test/Y_train, and subject_test/subject_train files and combines them to form 3 data 
 frames. It then renames the variables (including all of the variables for X) and merges the entire data set together. AFter this, it
 decodes the activity data collected by replacing the names for each column with a simplified descriptor that can be more readily
 understood. Finally, it arranges by the mean so that trends can be observed. Please see the readme in this Repo for further details.
 
-# Variables
+## Variables
 
 The tidydata text file is comprised of 88 columns of 80 rows. It identifies the subject the data was taken from (subject_number, 30 
 participants total), the type of activity they were doing when the recording was taken (Activity_type, 6 different types), and 86 
 variables concerning the specific measurements made by the gyroscope and accelerometer in the Galaxy S II device (86 based on x, y, z
 coordinate reports). 
 
-Subject_number
+### Subject_number
 
 Describes which participant the information is coming from. They are represented by an integer from 1-30 with no unit.
 
-Activity_type
+### Activity_type
 
 Describes what activity the subject was performing when the readings were taken. There are 6 levels corresponding to the following:
 
@@ -74,7 +74,7 @@ Describes what activity the subject was performing when the readings were taken.
 These variables were retrieved from the activity_labels document in the zip file found in the sources section below. Each of these
 is a unitless factor.
 
-Movement Measurements
+### Movement Measurements
 
 These are found in columns 3:88 of the tidy data file. They are all numeric and correspond to the means and standard deviations of the 
 x, y, and z coordinates for accelerometers and gyroscopes present in the Galaxy S II device. These are then distinguished by time,
@@ -125,7 +125,7 @@ further explanation of them can be found in the README in the zipfile listed in 
 "Angle(T-BodyGyroscopeJerkMean,GravityMean)"                 "Angle(X,GravityMean)"                                      
 "Angle(Y,GravityMean)"                                       "Angle(Z,GravityMean)"
 
-# Sources
+## Sources
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
