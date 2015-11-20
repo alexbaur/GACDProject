@@ -49,7 +49,7 @@ combined_mean_std <- combined[, c(1, 2, fmeanstd$V1+2)]
 ## Get activity labels
 activity_labels <- read.table("activity_labels.txt", strip.white = TRUE)
 
-## Correlate the data in the activity_labels object with Y_data in combined_mean_std
+## Correlate the data in the activity_labels object with Activity_type in combined_mean_std
 combined_mean_std$Activity_type <- activity_labels[combined_mean_std$Activity_type, 2]
 
 ## Part 4
