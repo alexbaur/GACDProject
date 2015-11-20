@@ -1,0 +1,131 @@
+# Getting and Cleaning Data Wearable Device Project
+Code Book
+Alex Baur
+11/19/15
+html_document
+keep_md
+true
+
+# Project Description
+
+Using the data from: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones the task was to clean and 
+arrange information from the accelerometer measurements of Galaxy S II devices worn by 30 participants while doing a variety of
+physical activities.
+
+# Study design and data processing
+
+From the UCI Machine Learning Repository linked above:
+
+"he experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six 
+activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the 
+waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a 
+constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly 
+partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding 
+windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion 
+components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to 
+have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features 
+was obtained by calculating variables from the time and frequency domain."
+
+# Creating the tidy datafile
+
+The tidy datafile was created through the following steps:
+
+1. Download the data from the UCI machine learning repository.
+2. Assign the test and train variables (subject, X, Y) to objects that read them as a table.
+3. Combine the corresponding test and train variables.
+4. Assign names to the values for X from the "features" document.
+5. Combine all 3 data frames together.
+6. Extract the mean and standard deviation measurements from "features" and extract the corresponding rows from the combined data frame.
+7. Extract the activity labels from the "activity_labels" file and implement in the "Activity_type" column.
+8. Alter the names for the various measurements to be less abbreviated and easier to understand.
+9. Aggregate and write the table to "tidydata.txt".
+
+# Cleaning of the data
+
+The cleaning script takes the X_test/X_train, Y_test/Y_train, and subject_test/subject_train files and combines them to form 3 data 
+frames. It then renames the variables (including all of the variables for X) and merges the entire data set together. AFter this, it
+decodes the activity data collected by replacing the names for each column with a simplified descriptor that can be more readily
+understood. Finally, it arranges by the mean so that trends can be observed. Please see the readme in this Repo for further details.
+
+# Variables
+
+The tidydata text file is comprised of 88 columns of 80 rows. It identifies the subject the data was taken from (subject_number, 30 
+participants total), the type of activity they were doing when the recording was taken (Activity_type, 6 different types), and 86 
+variables concerning the specific measurements made by the gyroscope and accelerometer in the Galaxy S II device (86 based on x, y, z
+coordinate reports). 
+
+Subject_number
+
+Describes which participant the information is coming from. They are represented by an integer from 1-30 with no unit.
+
+Activity_type
+
+Describes what activity the subject was performing when the readings were taken. There are 6 levels corresponding to the following:
+
+1 WALKING
+2 WALKING_UPSTAIRS
+3 WALKING_DOWNSTAIRS
+4 SITTING
+5 STANDING
+6 LAYING
+
+These variables were retrieved from the activity_labels document in the zip file found in the sources section below. Each of these
+is a unitless factor.
+
+Movement Measurements
+
+These are found in columns 3:88 of the tidy data file. They are all numeric and correspond to the means and standard deviations of the 
+x, y, and z coordinates for accelerometers and gyroscopes present in the Galaxy S II device. These are then distinguished by time,
+and angle denotations which are also then further broken down by magnitude and jerk measurements. These variables are listed below and
+further explanation of them can be found in the README in the zipfile listed in the sources section.
+
+"TimeBodyAccelerometerMean()-X"                              "TimeBodyAccelerometerMean()-Y"                             
+"TimeBodyAccelerometerMean()-Z"                              "TimeBodyAccelerometerStdDev()-X"                           
+"TimeBodyAccelerometerStdDev()-Y"                            "TimeBodyAccelerometerStdDev()-Z"                           
+"TimeGravityAccelerometerMean()-X"                           "TimeGravityAccelerometerMean()-Y"                          
+"TimeGravityAccelerometerMean()-Z"                           "TimeGravityAccelerometerStdDev()-X"                        
+"TimeGravityAccelerometerStdDev()-Y"                         "TimeGravityAccelerometerStdDev()-Z"                        
+"TimeBodyAccelerometerJerkMean()-X"                          "TimeBodyAccelerometerJerkMean()-Y"                         
+"TimeBodyAccelerometerJerkMean()-Z"                          "TimeBodyAccelerometerJerkStdDev()-X"                       
+"TimeBodyAccelerometerJerkStdDev()-Y"                        "TimeBodyAccelerometerJerkStdDev()-Z"                       
+"TimeBodyGyroscopeMean()-X"                                  "TimeBodyGyroscopeMean()-Y"                                 
+"TimeBodyGyroscopeMean()-Z"                                  "TimeBodyGyroscopeStdDev()-X"                               
+"TimeBodyGyroscopeStdDev()-Y"                                "TimeBodyGyroscopeStdDev()-Z"                               
+"TimeBodyGyroscopeJerkMean()-X"                              "TimeBodyGyroscopeJerkMean()-Y"                             
+"TimeBodyGyroscopeJerkMean()-Z"                              "TimeBodyGyroscopeJerkStdDev()-X"                           
+"TimeBodyGyroscopeJerkStdDev()-Y"                            "TimeBodyGyroscopeJerkStdDev()-Z"                           
+"TimeBodyAccelerometerMagnitudeMean()"                       "TimeBodyAccelerometerMagnitudeStdDev()"                    
+"TimeGravityAccelerometerMagnitudeMean()"                    "TimeGravityAccelerometerMagnitudeStdDev()"                 
+"TimeBodyAccelerometerJerkMagnitudeMean()"                   "TimeBodyAccelerometerJerkMagnitudeStdDev()"                
+"TimeBodyGyroscopeMagnitudeMean()"                           "TimeBodyGyroscopeMagnitudeStdDev()"                        
+"TimeBodyGyroscopeJerkMagnitudeMean()"                       "TimeBodyGyroscopeJerkMagnitudeStdDev()"                    
+"FrequencyBodyAccelerometerMean()-X"                         "FrequencyBodyAccelerometerMean()-Y"                        
+"FrequencyBodyAccelerometerMean()-Z"                         "FrequencyBodyAccelerometerStdDev()-X"                      
+"FrequencyBodyAccelerometerStdDev()-Y"                       "FrequencyBodyAccelerometerStdDev()-Z"                      
+"FrequencyBodyAccelerometerMeanFreq()-X"                     "FrequencyBodyAccelerometerMeanFreq()-Y"                    
+"FrequencyBodyAccelerometerMeanFreq()-Z"                     "FrequencyBodyAccelerometerJerkMean()-X"                    
+"FrequencyBodyAccelerometerJerkMean()-Y"                     "FrequencyBodyAccelerometerJerkMean()-Z"                    
+"FrequencyBodyAccelerometerJerkStdDev()-X"                   "FrequencyBodyAccelerometerJerkStdDev()-Y"                  
+"FrequencyBodyAccelerometerJerkStdDev()-Z"                   "FrequencyBodyAccelerometerJerkMeanFreq()-X"                
+"FrequencyBodyAccelerometerJerkMeanFreq()-Y"                 "FrequencyBodyAccelerometerJerkMeanFreq()-Z"                
+"FrequencyBodyGyroscopeMean()-X"                             "FrequencyBodyGyroscopeMean()-Y"                            
+"FrequencyBodyGyroscopeMean()-Z"                             "FrequencyBodyGyroscopeStdDev()-X"                          
+"FrequencyBodyGyroscopeStdDev()-Y"                           "FrequencyBodyGyroscopeStdDev()-Z"                          
+"FrequencyBodyGyroscopeMeanFreq()-X"                         "FrequencyBodyGyroscopeMeanFreq()-Y"                        
+"FrequencyBodyGyroscopeMeanFreq()-Z"                         "FrequencyBodyAccelerometerMagnitudeMean()"                 
+"FrequencyBodyAccelerometerMagnitudeStdDev()"                "FrequencyBodyAccelerometerMagnitudeMeanFreq()"             
+"FrequencyAccelerometerAccelerometerJerkMagnitudeMean()"     "FrequencyAccelerometerAccelerometerJerkMagnitudeStdDev()"  
+"FrequencyAccelerometerAccelerometerJerkMagnitudeMeanFreq()" "FrequencyAccelerometerGyroscopeMagnitudeMean()"            
+"FrequencyAccelerometerGyroscopeMagnitudeStdDev()"           "FrequencyAccelerometerGyroscopeMagnitudeMeanFreq()"        
+"FrequencyAccelerometerGyroscopeJerkMagnitudeMean()"         "FrequencyAccelerometerGyroscopeJerkMagnitudeStdDev()"      
+"FrequencyAccelerometerGyroscopeJerkMagnitudeMeanFreq()"     "Angle(T-BodyAccelerometerMean,Gravity)"                    
+"Angle(T-BodyAccelerometerJerkMean),GravityMean)"            "Angle(T-BodyGyroscopeMean,GravityMean)"                    
+"Angle(T-BodyGyroscopeJerkMean,GravityMean)"                 "Angle(X,GravityMean)"                                      
+"Angle(Y,GravityMean)"                                       "Angle(Z,GravityMean)"
+
+# Sources
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
